@@ -1,11 +1,10 @@
+![Traffic Graph Example](example_graph.png)
 # 🛰️ Floyd–Warshall vs Simulated Annealing for Shortest Path in Dynamic Graphs
 
 A comparative study of the **Floyd–Warshall (FW)** algorithm and **Simulated Annealing (SA)** for solving **shortest path problems** in **traffic-based graphs**.  
 Experiments are conducted on both **static** and **dynamic** networks using real-world data from **OpenStreetMap (OSM)**.
 
 > Built with **Python 3.11**
-
-![Traffic Graph Example](example_graph.png)
 
 ---
 
