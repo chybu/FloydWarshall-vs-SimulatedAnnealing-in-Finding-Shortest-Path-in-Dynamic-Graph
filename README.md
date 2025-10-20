@@ -5,6 +5,8 @@ Experiments are conducted on both **static** and **dynamic** networks using real
 
 > Built with **Python 3.11**
 
+![Traffic Graph Example](example_graph.png)
+
 ---
 
 ## 📘 Overview
