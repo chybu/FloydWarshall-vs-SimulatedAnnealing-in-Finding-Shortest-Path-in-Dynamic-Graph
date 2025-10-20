@@ -11,9 +11,12 @@ Experiments are conducted on both **static** and **dynamic** networks using real
 
 The **Floyd–Warshall (FW)** algorithm is a classical dynamic programming approach that computes all-pairs shortest paths in a weighted graph. It performs efficiently on smaller, static graphs but becomes computationally expensive for large or frequently changing networks.
 
-In contrast, **Simulated Annealing (SA)** is a **metaheuristic optimization technique** inspired by the physical annealing process. It uses **randomized exploration, adaptive temperature control,** and **mutation** to find near-optimal solutions in complex or dynamic environments. While SA is commonly applied to the **Traveling Salesman Problem (TSP)**, this project explores its potential in solving **shortest path problems (SPP)** as well.
+**Simulated Annealing (SA)** is a **metaheuristic optimization technique** inspired by the physical annealing process. It uses **randomized exploration, adaptive temperature control,** and **mutation** to find near-optimal solutions in complex or dynamic environments. While SA is commonly applied to the **Traveling Salesman Problem (TSP)**, this project explores its potential in solving **shortest path problems (SPP)** under **traffic dynamics**.
 
-To evaluate both algorithms, FW is used as a deterministic baseline while SA acts as a heuristic alternative. Both methods operate on **directed adjacency matrices**.
+In this study, **FW** and **SA** are compared based on their performance and adaptability to changing edge weights.  
+**Dijkstra’s algorithm** is used as the **ground truth reference** to evaluate the accuracy of both approaches after convergence.
+
+Both FW and SA operate on **directed adjacency matrices** generated from real or synthetic graph data.
 
 ---
 
@@ -21,33 +24,33 @@ To evaluate both algorithms, FW is used as a deterministic baseline while SA act
 
 1. **Graph generation**  
    - Graphs are generated from the **OpenStreetMap API** using `osmnx`.  
-   - Nodes represent **road intersections**, and edges represent **roads** between them.  
+   - Nodes represent **road intersections**, and edges represent **roads** connecting them.  
    - Edge weights are computed using three factors:  
      - **Length** of the road  
      - **Maximum allowed speed**  
      - **Number of lanes**
 
 2. **Graph density**  
-   - Real-world road networks are typically sparse, with a **density < 0.08**.  
-   - To achieve more diverse testing conditions, additional **synthetic graphs** are generated with predefined densities.
+   - Real-world traffic graphs are typically sparse, with a **density < 0.08**.  
+   - To increase diversity, **synthetic random graphs** are generated with predefined densities.
 
 3. **Static graphs**  
-   - Edge weights remain constant throughout the test.
+   - Edge weights remain constant across iterations.
 
 4. **Dynamic graphs**  
-   - Edge weights **change periodically** to simulate traffic variations.  
-   - Since FW and SA converge at different rates, their underlying graphs evolve differently.  
-   - After both algorithms converge, **Dijkstra’s algorithm** is applied to the final state of each graph to compute the **ground-truth shortest path**.
+   - Edge weights **change periodically** to simulate fluctuating traffic conditions.  
+   - Since FW and SA converge at different speeds, each algorithm experiences different graph states during execution.  
+   - After convergence, **Dijkstra’s algorithm** runs on each final graph to determine the **ground-truth shortest path**, which is then used for comparison.
 
 ---
 
 ## ⚙️ Evaluation Metrics
 
 - **Runtime** – total execution time.  
-- **Memory usage** – total RAM consumed during execution.  
-- **Error from optimal** – difference from Dijkstra’s ground-truth path.  
+- **Memory usage** – total RAM consumption.  
+- **Error from ground truth** – deviation from Dijkstra’s optimal solution.  
 - **Improvement Rate (SA only)** – how much SA improves its initial solution.  
-- **Fast Convergence Score (SA only)** – how quickly SA finds a better solution (range: 0–1, lower is faster).
+- **Fast Convergence Score (SA only)** – how quickly SA finds a better solution (range: 0–1, lower = faster).
 
 ---
 
